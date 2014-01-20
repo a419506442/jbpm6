@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+    xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+             			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security
+                        http://www.springframework.org/schema/security/spring-security-3.0.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd">
+                        
+    <!-- 不要过滤图片等静态资源 <http pattern="/**/*.jpg" security="none" /> <http pattern="/**/*.png" 
+		security="none" /> <http pattern="/**/*.gif" security="none" /> <http pattern="/**/*.css" 
+		security="none" /> <http pattern="/**/*.js" security="none" /> -->
+
+	<!-- 配置页面访问权限 --><!--当访问被拒绝时，会转到403.jsp -->
+	<http auto-config="true" access-denied-page="403.jsp">
+		<!-- 登陆页面和忘记密码页面不过滤 -->
+		<intercept-url pattern="/login.jsp" filters="none"/>
+		<form-login login-page="/login.jsp" authentication-failure-url="/login.jsp?error=true" default-target-url="/index.jsp"/>
+		<logout logout-success-url="/login.jsp"/>
+		<!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中）
+		<remember-me data-source-ref="dataSource" /> -->
+		<!-- 实现免登陆验证 -->
+		<!-- 只能登陆一次 -->
+		<session-management session-authentication-error-url="/402.jsp" invalid-session-url="/sessionTimeout.jsp">
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+		</session-management>
+		
+		<!--增加一个filter，这点与Acegi是不一样的，不能修改默认的filter了，这个filter位于FILTER_SECURITY_INTERCEPTOR之前 -->
+		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="myFilter" />
+	</http>
+
+	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性，     我们的所有控制将在这三个类中实现，解释详见具体配置  -->
+	<beans:bean id="myFilter"
+		class="com.robin.erp.fwk.security.MyFilterSecurityInterceptor">
+		<!-- 用户拥有的权限 -->
+		<beans:property name="authenticationManager" ref="authenticationManager"/>
+		<!-- 用户是否拥有所请求资源的权限 -->
+		<beans:property name="accessDecisionManager" ref="myAccessDecisionManagerBean"/>
+		<!-- 资源与权限对应关系 -->
+		<beans:property name="securityMetadataSource" ref="securityMetadataSource"/>
+	</beans:bean>
+
+	 <!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可  
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="myUserDetailService">
+		  如果用户的密码采用加密的话，可以加点“盐”<password-encoder hash="md5" />
+		</authentication-provider>
+	</authentication-manager>
+	<beans:bean id="myUserDetailService" class="com.robin.erp.fwk.security.MyUserDetailService" />-->
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源
+	<beans:bean id="myAccessDecisionManagerBean" class="com.robin.erp.fwk.security.MyAccessDecisionManager"></beans:bean> -->
+	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问
+	<beans:bean id="securityMetadataSource" class="com.robin.erp.fwk.security.MyInvocationSecurityMetadataSource" /> -->
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="user1" password="1111" authorities="ROLE_USER" />
+				<user name="user2" password="2222" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>
