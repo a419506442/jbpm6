@@ -52,12 +52,12 @@
 	</bean>
 	<!-- 配置userservice类 -->
 	<bean id="myUserDetailService" class="com.hh.jbpm.security.service.MyUserDetailService">
-	    <property name="userCache" ref="userCache"/>
+	  <!--   <property name="userCache" ref="userCache"/> -->
 	</bean>
-	<!-- 用户的密码加密或解密 -->
+	<!-- 用户的密码加密或解密 
 	<bean id="passwordEncoder"
-		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
-	<!-- 启用用户的缓存功能 -->
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />-->
+	<!-- 启用用户的缓存功能 
 	<bean id="userCache"
 		class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
 		<property name="cache" ref="userEhCache" />
@@ -68,11 +68,11 @@
 	<bean id="userEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
 		<property name="cacheName" value="userCache" />
 		<property name="cacheManager" ref="cacheManager" />
-	</bean>
-	<!-- 设置权限的前缀为AUTH_，而不是ROLE_ -->
+	</bean>-->
+	<!-- 设置权限的前缀为AUTH_，而不是ROLE_ 
 	<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
     	<property name="rolePrefix" value="ROLE_"/>
-    </bean>
+    </bean>-->
     
 	
 	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源。 -->
@@ -86,5 +86,6 @@
 	</bean>
 	
 	<bean id="resourcesDao" class="com.hh.jbpm.security.dao.ResourcesDao"></bean>
+	<bean id="userInfoDao" class="com.hh.jbpm.security.dao.UserInfoDao"></bean>
 	
 </beans>

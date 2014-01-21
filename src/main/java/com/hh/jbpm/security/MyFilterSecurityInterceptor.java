@@ -2,7 +2,9 @@ package com.hh.jbpm.security;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -14,7 +16,7 @@ import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor {
+public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
 	@Autowired
 	private FilterInvocationSecurityMetadataSource securityMetadataSource;
@@ -59,5 +61,15 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor {
 	@Override
 	public SecurityMetadataSource obtainSecurityMetadataSource() {
 		return this.securityMetadataSource;
+	}
+
+	@Override
+	public void destroy() {
+		
+	}
+
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+		
 	}
 }

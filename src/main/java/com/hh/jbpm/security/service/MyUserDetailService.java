@@ -22,8 +22,8 @@ public class MyUserDetailService implements UserDetailsService {
 
 	@Autowired
 	private UserInfoDao userInfoDao;
-	@Autowired
-	private UserCache userCache;
+//	@Autowired
+//	private UserCache userCache;
 	
 	public UserInfoDao getUserInfoDao() {
 		return userInfoDao;
@@ -33,13 +33,13 @@ public class MyUserDetailService implements UserDetailsService {
 		this.userInfoDao = userInfoDao;
 	}
 
-	public UserCache getUserCache() {
-		return userCache;
-	}
-
-	public void setUserCache(UserCache userCache) {
-		this.userCache = userCache;
-	}
+//	public UserCache getUserCache() {
+//		return userCache;
+//	}
+//
+//	public void setUserCache(UserCache userCache) {
+//		this.userCache = userCache;
+//	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username)

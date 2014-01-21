@@ -21,12 +21,14 @@ public class MyInvocationSecurityMetadataSourceService implements
 	// resourceMap及为key-url，value-Collection<ConfigAttribute>,资源权限对应Map
 	private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
 	
-	public ResourcesDao getResourcesDao() {
-		return resourcesDao;
-	}
-
+//	public ResourcesDao getResourcesDao() {
+//		return resourcesDao;
+//	}
+//
 //	public void setResourcesDao(ResourcesDao resourcesDao) {
 //		this.resourcesDao = resourcesDao;
+//		System.out.println("加载MyInvocationSecurityMetadataSourceService..."
+//				+ resourcesDao);
 //		loadResourceDefine();
 //	}
 	
@@ -35,7 +37,9 @@ public class MyInvocationSecurityMetadataSourceService implements
 	}
 	public MyInvocationSecurityMetadataSourceService(ResourcesDao resourcesDao){
 		this.resourcesDao = resourcesDao;
-//		loadResourceDefine();
+		System.out.println("加载MyInvocationSecurityMetadataSourceService..."
+				+ resourcesDao);
+		loadResourceDefine();
 	}
 
 	// 加载所有资源与权限的关系
