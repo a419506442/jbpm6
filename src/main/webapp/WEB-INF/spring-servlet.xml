@@ -54,9 +54,9 @@
 	<bean id="myUserDetailService" class="com.hh.jbpm.security.service.MyUserDetailService">
 	  <!--   <property name="userCache" ref="userCache"/> -->
 	</bean>
-	<!-- 用户的密码加密或解密 
+	<!-- 用户的密码加密或解密 -->
 	<bean id="passwordEncoder"
-		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />-->
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 	<!-- 启用用户的缓存功能 
 	<bean id="userCache"
 		class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
