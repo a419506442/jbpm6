@@ -69,7 +69,7 @@
 		<property name="cacheName" value="userCache" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
-	<!-- 设置权限的前缀为AUTH_，而不是ROLE_。 -->
+	<!-- 设置权限的前缀为AUTH_，而不是ROLE_ -->
 	<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
     	<property name="rolePrefix" value="ROLE_"/>
     </bean>
@@ -81,7 +81,8 @@
 	<!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问。-->
 	<bean id="mySecurityMetadataSource" 
 		class="com.hh.jbpm.security.MyInvocationSecurityMetadataSourceService">
-    	<property name="resourcesDao" ref="resourcesDao"></property>
+    	<!-- <property name="resourcesDao" ref="resourcesDao"></property> -->
+    	<constructor-arg ref="resourcesDao"></constructor-arg>
 	</bean>
 	
 	<bean id="resourcesDao" class="com.hh.jbpm.security.dao.ResourcesDao"></bean>

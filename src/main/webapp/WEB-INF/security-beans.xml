@@ -33,9 +33,9 @@
         <beans:property name="securityMetadataSource" ref="securityMetadataSource"/>        
     </beans:bean>
     <authentication-manager alias="authenticationManager">
-        <authentication-provider user-service-ref="myUserDetailService"></authentication-provider>
+        <authentication-provider user-service-ref="userDetailService"></authentication-provider>
     </authentication-manager>
-    <beans:bean id="myUserDetailService" class="com.hh.jbpm.security.service.MyUserDetailService"></beans:bean>
+    <beans:bean id="userDetailService" class="com.hh.jbpm.security.service.MyUserDetailService"></beans:bean>
     <beans:bean id="myAccessDecisionManagerBean" class="com.hh.jbpm.security.MyAccessDecisionManager"></beans:bean>
     <beans:bean id="securityMetadataSource" class="com.hh.jbpm.security.MyInvocationSecurityMetadataSourceService"></beans:bean>
     

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.hh.jbpm.security.domain.Users;
 
@@ -57,7 +57,8 @@ public class UserInfoDao {
 			List<String> authsList = loadUserAuthorities(username);
 			
 			for(String roleName:authsList){
-				GrantedAuthorityImpl authority = new GrantedAuthorityImpl(roleName);
+//				GrantedAuthorityImpl authority = new GrantedAuthorityImpl(roleName);
+				SimpleGrantedAuthority authority = new SimpleGrantedAuthority(roleName);
 				auths.add(authority);
 			}
 			return auths;
