@@ -1,4 +1,4 @@
-package com.hh.jbpm.security.dao;
+package com.hh.jbpm.security.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,22 +15,29 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import com.hh.jbpm.security.dao.IUserInfoDao;
 import com.hh.jbpm.security.domain.Users;
 
-public class UserInfoDao {
+public class UserInfoDao implements IUserInfoDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	private final static Logger log = LoggerFactory
 			.getLogger(UserInfoDao.class);
 	
-	public UserInfoDao(){
-		loadSource();
-		System.out.println("加载UserInfoDao..." + jdbcTemplate);
+	
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+		System.out.println("加载UserInfoDao..." + this.jdbcTemplate);
 	}
 
+//	public UserInfoDao(){
+//		loadSource();
+//		System.out.println("加载UserInfoDao..." + jdbcTemplate);
+//	}
+
 	public Users findByName(String username) throws SQLException {
-		String sql = "select * from user where username='" + username + "'";
+		String sql = "select * from users where username='" + username + "'";
 		RowMapper<Users> mapper = new RowMapper<Users>() {
 			@Override
 			public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -72,7 +79,7 @@ public class UserInfoDao {
 	public List<String> loadUserAuthorities(String username) {
 		try {
 			String sql = "select r.name as authority "
-					+ "from user u join user_role ur on u.id=ur.user_id "
+					+ "from users u join user_role ur on u.id=ur.user_id "
 					+ "join role r on r.id=ur.role_id " + "where u.username='"
 					+ username + "'";
 			List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
@@ -85,9 +92,5 @@ public class UserInfoDao {
 			log.error("find by authorities by username failed." + re);
 			throw re;
 		}
-	}
-	
-	private void loadSource(){
-		System.out.println("加载资源");
 	}
 }

@@ -6,12 +6,11 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.hh.jbpm.security.dao.UserInfoDao;
+import com.hh.jbpm.security.dao.IUserInfoDao;
 import com.hh.jbpm.security.domain.Users;
 
 /*
@@ -19,17 +18,16 @@ import com.hh.jbpm.security.domain.Users;
  *该UserDetails包括用户名、密码、是否可用、是否过期等信息。
  */
 public class MyUserDetailService implements UserDetailsService {
-
 	@Autowired
-	private UserInfoDao userInfoDao;
+	private IUserInfoDao userInfoDao;
 //	@Autowired
 //	private UserCache userCache;
 	
-	public UserInfoDao getUserInfoDao() {
-		return userInfoDao;
-	}
-
-	public void setUserInfoDao(UserInfoDao userInfoDao) {
+//	public UserInfoDao getUserInfoDao() {
+//		return userInfoDao;
+//	}
+//
+	public void setUserInfoDao(IUserInfoDao userInfoDao) {
 		this.userInfoDao = userInfoDao;
 	}
 

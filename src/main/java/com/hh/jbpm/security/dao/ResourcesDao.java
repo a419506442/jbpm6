@@ -26,9 +26,7 @@ public class ResourcesDao {
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
-	}
-	public ResourcesDao() {
-		System.out.println("加载ResourcesDao..." + jdbcTemplate);
+		System.out.println("加载ResourcesDao..." + this.jdbcTemplate);
 	}
 	
 	public List<Resource> findAll() {

@@ -25,7 +25,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/*-beans.xml</param-value>
+        <param-value>/WEB-INF/application-*.xml</param-value>
     </context-param>
 
 
@@ -51,7 +51,7 @@
 
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
-        <url-pattern>*.action</url-pattern>
+        <url-pattern>/spring/*</url-pattern>
     </servlet-mapping>
 
 

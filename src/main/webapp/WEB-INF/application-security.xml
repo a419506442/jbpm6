@@ -9,8 +9,8 @@
                         http://www.springframework.org/schema/security
                         http://www.springframework.org/schema/security/spring-security-3.2.xsd
                         http://www.springframework.org/schema/context
-                        http://www.springframework.org/schema/context/spring-context.xsd">
-                       
+                        http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byName">
+            
     <http pattern="/**/*.jpg" security="none" />
     <http pattern="/**/*.png" security="none" />
     <http pattern="/**/*.gif" security="none" />
@@ -18,7 +18,7 @@
     <http pattern="/**/*.js" security="none" />
     
     <http pattern="/login.jsp" security="none"></http>
-    <http auto-config="true" access-denied-page="/403.jsp">
+    <http auto-config="true" access-denied-page="/accessDenied.jsp">
         <form-login login-page="/login.jsp" authentication-failure-url="/login.jsp?error=true" default-target-url="/index.jsp"/>
         <logout logout-success-url="/login.jsp"/>
         <session-management session-authentication-error-url="/402.jsp" invalid-session-url="/sessionTimeout.jsp">
@@ -34,14 +34,12 @@
     </beans:bean>
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailService">
-            <password-encoder ref="passwordEncoder">
+     <!--        <password-encoder ref="passwordEncoder">
                 <salt-source user-property="username"/>
-            </password-encoder>
+            </password-encoder> -->
         </authentication-provider>
     </authentication-manager>
-    <beans:bean id="userDetailService" class="com.hh.jbpm.security.service.MyUserDetailService"></beans:bean>
-    <beans:bean id="myAccessDecisionManagerBean" class="com.hh.jbpm.security.MyAccessDecisionManager"></beans:bean>
-    <beans:bean id="securityMetadataSource" class="com.hh.jbpm.security.MyInvocationSecurityMetadataSourceService"></beans:bean>
+    
     
     <!--<beans:bean id="securityMetadataSource" class="com.hh.jbpm.security.MyInvocationSecurityMetadataSourceService"></beans:bean>
      
