@@ -82,7 +82,30 @@
 			<version>${hibernate.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
+			<version>1.0.2.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
          
 		<!-- AspectJ -->
 		<dependency>
@@ -198,7 +221,7 @@
 			<dependency>
 		        <groupId>mysql</groupId>
 		        <artifactId>mysql-connector-java</artifactId>
-		        <version>5.0.5</version>
+		        <version>5.1.17</version>
 		</dependency>
 	</dependencies>
 
