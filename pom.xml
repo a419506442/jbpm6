@@ -14,6 +14,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<jbpm.version>6.0.0.Final</jbpm.version>
+		<hibernate.version>4.3.0.Final</hibernate.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -74,6 +75,15 @@
         </dependency>
         
 
+         <!-- hibernate -->
+         <dependency>
+			<groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+         
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
