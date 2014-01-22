@@ -27,14 +27,17 @@
         <custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="myFilter" />
     </http>
     
+    <!-- 自定义一个filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性 -->
     <beans:bean id="myFilter" class="com.hh.jbpm.security.MyFilterSecurityInterceptor">
         <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
         <beans:property name="accessDecisionManager" ref="myAccessDecisionManagerBean"/>
         <beans:property name="securityMetadataSource" ref="securityMetadataSource"/>        
     </beans:bean>
+    <!-- 验证配置，认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailService">
-     <!--        <password-encoder ref="passwordEncoder">
+     <!-- 如果用户密码采用加密的话        
+     <password-encoder ref="passwordEncoder">
                 <salt-source user-property="username"/>
             </password-encoder> -->
         </authentication-provider>

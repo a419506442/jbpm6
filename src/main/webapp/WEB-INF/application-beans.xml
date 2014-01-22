@@ -49,8 +49,11 @@
 		ref="cacheManager" /> </bean> -->
 	<!-- 设置权限的前缀为AUTH_，而不是ROLE_ <bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter"> 
 		<property name="rolePrefix" value="ROLE_"/> </bean> -->
+	<!-- 在这个类中，你就可以从数据库中读取用户的密码，用户的角色信息，是否锁定等信息 -->
 	<bean id="userDetailService" class="com.hh.jbpm.security.service.MyUserDetailService"></bean>
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
 	<bean id="myAccessDecisionManagerBean" class="com.hh.jbpm.security.MyAccessDecisionManager"></bean>
+	<!-- 资源数据定义，将所有的资源和权限对应关系建立起来，即定义某一些资源能被用户访问到 -->
 	<bean id="securityMetadataSource"
 		class="com.hh.jbpm.security.MyInvocationSecurityMetadataSourceService"></bean>
 
