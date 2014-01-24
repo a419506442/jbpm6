@@ -35,6 +35,15 @@
     <value>java:comp/env/jdbc/Jbpm6</value>
    </property>
   </bean>
+    
+ <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="test"/>
+		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+	</bean>
+	<!--<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean> -->
+ 
 	<!-- 操作数据库的模板类 -->
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource"></constructor-arg>
